@@ -4,6 +4,13 @@ What changed in each version of Tucano. The format follows [Keep a Changelog](ht
 
 ## [Unreleased]
 
+> **Em português:**
+> - **Correção:** responder no canal a uma pergunta que um agente deixou no fim da mensagem dele ("posso disparar agora?") chama esse agente, não outro. Quem escolhe quem responde agora vê como terminam as mensagens longas e as outras threads, e o agente que responde numa thread que você abriu escrevendo no canal lê as últimas mensagens do canal antes dela, o que estava na sua tela. Obrigado, braxT!
+
+### Fixed
+
+- **An answer written in the channel goes to the agent that asked.** In a channel that answers in threads, a person's message in the channel opens a thread of its own. The router read the other threads and messages only by their first 200 characters, so a question at the end of an agent's long reply (a routine's report ending "can I run it now?") never reached it, and "go ahead" was routed by role to someone else; the agent that answered read only the new thread, so it couldn't find what to run either. Now the router reads a long message as its opening and its end, sees how an agent last ended each other thread, and has a rule: a short answer to an agent's question goes to that agent. And a reply in a thread a person opened by writing in the conversation also reads the last 3 messages outside threads before it (from the 12 hours before), what that person had on screen.
+
 ## [0.2.24] - 2026-11-09
 
 > **Em português:**

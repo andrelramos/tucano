@@ -4,6 +4,13 @@ What changed in each version of Tucano. The format follows [Keep a Changelog](ht
 
 ## [Unreleased]
 
+> **Em português:**
+> - **Correção:** um agente no OpenCode com um modelo grátis (os `opencode/…-free`) não fica mais "Pensando" pra sempre. O OpenCode recusa esses modelos fora do app dele, e a resposta agora para na hora dizendo isso e o que fazer: trocar por um modelo pago (OpenCode Go ou Zen) ou de um provedor com a sua chave. Qualquer outro erro do modelo que o OpenCode só registra no log também encerra a resposta, depois de 30 segundos sem ele seguir.
+
+### Fixed
+
+- **OpenCode free models no longer leave a reply "thinking" forever.** OpenCode's free tier (`opencode/…-free`) refuses a call that doesn't carry OpenCode's built-in tools, as the app's never does ("Free usage limit reached. Free models work in OpenCode"), and `opencode run` only logs the error and then waits without exiting, so the reply showed "Thinking" with no end. The app now runs it with `--print-logs --log-level ERROR` and reads its stderr: a free model refused stops the turn at once with the reason and what to do (a paid model, OpenCode Go or Zen, or a provider with your key); any other failed model call stops it after 30 seconds without output (a retry that works goes on).
+
 ## [0.2.24] - 2026-11-09
 
 > **Em português:**
